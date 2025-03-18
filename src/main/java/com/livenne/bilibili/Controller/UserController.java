@@ -11,6 +11,7 @@ import java.util.List;
 public class UserController extends BaseController {
     @GetMapping
     public List<UserDto> getAllUser(){
+        System.out.println("test");
         return userService.getAllUser();
     }
 

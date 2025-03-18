@@ -17,8 +17,23 @@ public class Video {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "url")
-    private String url;
+    @Column(name = "video_url")
+    private String videoUrl;
+
+    @Column(name = "cover_url")
+    private String coverUrl;
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "id=" + id +
+                ", authorId=" + authorId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -52,22 +67,19 @@ public class Video {
         this.description = description;
     }
 
-    public String getUrl() {
-        return url;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
-    @Override
-    public String toString() {
-        return "Video{" +
-                "id=" + id +
-                ", authorId=" + authorId +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", url='" + url + '\'' +
-                '}';
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 }
