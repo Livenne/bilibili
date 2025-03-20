@@ -4,6 +4,9 @@ import com.livenne.bilibili.Pojo.Video;
 import com.livenne.bilibili.Utils.ApiResponse;
 import com.livenne.bilibili.Utils.CustomException;
 import com.livenne.bilibili.Utils.ResponseCode;
+import jdk.swing.interop.SwingInterOpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +19,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/video")
 public class VideoController extends BaseController {
+    private static final Logger log = LoggerFactory.getLogger(VideoController.class);
+
     @GetMapping
     public ApiResponse<List<Video>> getAllVideo() {
         return ApiResponse.success(videoService.getAllVideo());
@@ -32,8 +37,11 @@ public class VideoController extends BaseController {
                                       @RequestParam Integer authorId,
                                       @RequestParam String title,
                                       @RequestParam String description,
-                                      @RequestParam String releaseTime) throws CustomException {
+                                      @RequestParam String releaseTime) {
         String videoName = "", coverName = "";
+
+        System.out.println(title);
+        System.out.println(description);
 
         try {
              videoName = fileStorageService.saveFile(video);

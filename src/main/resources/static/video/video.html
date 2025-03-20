@@ -33,13 +33,13 @@
 
             // 视频封面
             const coverImage = document.createElement('img');
-            coverImage.src = video.coverUrl;
+            coverImage.src = `/api/file/${video.coverUrl}`; // 修改为通过后端访问路径
             coverImage.alt = video.title;
             coverImage.className = 'video-cover';
 
             // 视频播放器
             const videoPlayer = document.createElement('video');
-            videoPlayer.src = video.videoUrl;
+            videoPlayer.src = `/api/file/${video.videoUrl}`; // 修改为通过后端访问路径
             videoPlayer.className = 'video-player';
             videoPlayer.controls = true;
             videoPlayer.style.display = 'none'; // 默认隐藏
@@ -60,11 +60,11 @@
             const videoInfo = document.createElement('div');
             videoInfo.className = 'video-info';
             videoInfo.innerHTML = `
-                    <h3>${video.title}</h3>
-                    <p>作者 ID: ${video.authorId}</p>
-                    <p>${video.description}</p>
-                    <p>发布时间: ${new Date(video.releaseTime).toLocaleString()}</p>
-                `;
+                <h3>${video.title} ax</h3>
+                <p>作者 ID: ${video.authorId}</p>
+                <p>${video.description} ax</p>
+                <p>发布时间: ${video.releaseTime}</p>
+            `;
 
             // 将元素添加到视频项
             videoItem.appendChild(coverImage);
