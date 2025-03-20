@@ -22,7 +22,7 @@ public class FileStorageServiceImpl implements FileStorageService {
     private String filesPath;
 
     @Override
-    public void saveFile(MultipartFile file) throws IOException {
+    public String saveFile(MultipartFile file) throws IOException {
         Path dirPath = Paths.get(filesPath);
         if (!Files.exists(dirPath)) {
             Files.createDirectories(dirPath);
@@ -30,7 +30,7 @@ public class FileStorageServiceImpl implements FileStorageService {
         String fileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
         Path newPath =  dirPath.resolve(fileName);
         Files.copy(file.getInputStream(), newPath, StandardCopyOption.REPLACE_EXISTING);
-        System.out.println(newPath);
+        return fileName;
     }
 
     @Override
@@ -42,5 +42,14 @@ public class FileStorageServiceImpl implements FileStorageService {
             return resource;
         }
         return null;
+    }
+
+    @Override
+    public void deleteFile(String filename) throws IOException {
+        Path dirPath = Paths.get(filesPath);
+        Path filePath = dirPath.resolve(filename);
+        if (Files.exists(filePath)) {
+            Files.delete(filePath);
+        }
     }
 }

@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 
 @Service
 public interface FileStorageService {
-    void saveFile(MultipartFile file) throws IOException;
+    String saveFile(MultipartFile file) throws IOException;
     Resource loadFile(String filename) throws MalformedURLException;
+    void deleteFile(String filename) throws IOException;
 }
