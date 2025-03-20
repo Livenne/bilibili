@@ -21,9 +21,6 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
     @Column(name = "signature")
     private String signature;
 
@@ -80,14 +77,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getSignature() {
         return signature;
     }
@@ -136,7 +125,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", nickName='" + nickName + '\'' +
                 ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
                 ", signature='" + signature + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +
                 ", gender=" + gender +
