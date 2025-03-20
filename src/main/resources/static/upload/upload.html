@@ -4,44 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>视频上传</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        .form-group button {
-            padding: 10px 15px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .form-group button:hover {
-            background-color: #0056b3;
-        }
-        .message {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-        }
-    </style>
+    <link rel="stylesheet" href="../video/styles.css">
 </head>
 <body>
 <div class="container">
@@ -68,6 +31,10 @@
             <textarea id="description" name="description" rows="4" cols="50" required></textarea>
         </div>
         <div class="form-group">
+            <label for="releaseTime">发布时间：</label>
+            <input type="datetime-local" id="releaseTime" name="releaseTime" required>
+        </div>
+        <div class="form-group">
             <button type="button" onclick="uploadVideo()">上传</button>
         </div>
     </form>
@@ -85,6 +52,7 @@
         formData.append('authorId', document.getElementById('authorId').value);
         formData.append('title', document.getElementById('title').value);
         formData.append('description', document.getElementById('description').value);
+        formData.append('releaseTime', document.getElementById('releaseTime').value);
 
         fetch('/api/video', {
             method: 'POST',

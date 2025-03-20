@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频展示</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>视频列表</h1>
+    <div id="videoGrid" class="video-grid"></div>
+</div>
+
+<script>
+    async function fetchVideos() {
+        const response = await fetch('/api/video');
+        const data = await response.json();
+        if (data.code === 200) {
+            displayVideos(data.data);
+        } else {
+            console.error('Failed to fetch videos:', data.message);
+        }
+    }
+
+    function displayVideos(videos) {
+        const videoGrid = document.getElementById('videoGrid');
+        videoGrid.innerHTML = ''; // 清空现有内容
+
+        videos.forEach(video => {
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item';
+
+            // 视频封面
+            const coverImage = document.createElement('img');
+            coverImage.src = video.coverUrl;
+            coverImage.alt = video.title;
+            coverImage.className = 'video-cover';
+
+            // 视频播放器
+            const videoPlayer = document.createElement('video');
+            videoPlayer.src = video.videoUrl;
+            videoPlayer.className = 'video-player';
+            videoPlayer.controls = true;
+            videoPlayer.style.display = 'none'; // 默认隐藏
+
+            // 鼠标悬浮时显示视频播放器
+            coverImage.addEventListener('mouseover', () => {
+                videoPlayer.style.display = 'block';
+                videoPlayer.play();
+            });
+
+            // 鼠标移开时隐藏视频播放器
+            coverImage.addEventListener('mouseout', () => {
+                videoPlayer.style.display = 'none';
+                videoPlayer.pause();
+            });
+
+            // 视频信息
+            const videoInfo = document.createElement('div');
+            videoInfo.className = 'video-info';
+            videoInfo.innerHTML = `
+                    <h3>${video.title}</h3>
+                    <p>作者 ID: ${video.authorId}</p>
+                    <p>${video.description}</p>
+                    <p>发布时间: ${new Date(video.releaseTime).toLocaleString()}</p>
+                `;
+
+            // 将元素添加到视频项
+            videoItem.appendChild(coverImage);
+            videoItem.appendChild(videoPlayer);
+            videoItem.appendChild(videoInfo);
+
+            // 将视频项添加到网格
+            videoGrid.appendChild(videoItem);
+        });
+    }
+
+    // 页面加载时获取视频数据
+    document.addEventListener('DOMContentLoaded', fetchVideos);
+</script>
+</body>
+</html>

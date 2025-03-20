@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -27,7 +28,7 @@ public class FileStorageServiceImpl implements FileStorageService {
         if (!Files.exists(dirPath)) {
             Files.createDirectories(dirPath);
         }
-        String fileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
+        String fileName = UUID.randomUUID().toString().replaceAll("-","") + "." + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf(".")+1);
         Path newPath =  dirPath.resolve(fileName);
         Files.copy(file.getInputStream(), newPath, StandardCopyOption.REPLACE_EXISTING);
         return fileName;

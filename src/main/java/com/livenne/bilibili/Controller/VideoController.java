@@ -4,10 +4,12 @@ import com.livenne.bilibili.Pojo.Video;
 import com.livenne.bilibili.Utils.ApiResponse;
 import com.livenne.bilibili.Utils.CustomException;
 import com.livenne.bilibili.Utils.ResponseCode;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +31,8 @@ public class VideoController extends BaseController {
                                       @RequestParam MultipartFile cover,
                                       @RequestParam Integer authorId,
                                       @RequestParam String title,
-                                      @RequestParam String description) throws CustomException {
+                                      @RequestParam String description,
+                                      @RequestParam String releaseTime) throws CustomException {
         String videoName = "", coverName = "";
 
         try {
@@ -44,8 +47,10 @@ public class VideoController extends BaseController {
         v.setAuthorId(authorId);
         v.setVideoUrl(videoName);
         v.setCoverUrl(coverName);
+        v.setReleaseTime(releaseTime);
         videoService.addVideo(v);
         return ApiResponse.success();
+
     }
 
     @PutMapping

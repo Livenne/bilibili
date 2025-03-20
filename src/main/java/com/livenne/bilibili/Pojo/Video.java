@@ -2,6 +2,8 @@ package com.livenne.bilibili.Pojo;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 public class Video {
     @Id
@@ -23,17 +25,8 @@ public class Video {
     @Column(name = "cover_url")
     private String coverUrl;
 
-    @Override
-    public String toString() {
-        return "Video{" +
-                "id=" + id +
-                ", authorId=" + authorId +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", videoUrl='" + videoUrl + '\'' +
-                ", coverUrl='" + coverUrl + '\'' +
-                '}';
-    }
+    @Column(name = "release_time")
+    private String releaseTime;
 
     public Integer getId() {
         return id;
@@ -81,5 +74,26 @@ public class Video {
 
     public void setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl;
+    }
+
+    public String getReleaseTime() {
+        return releaseTime;
+    }
+
+    public void setReleaseTime(String releaseTime) {
+        this.releaseTime = releaseTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "id=" + id +
+                ", authorId=" + authorId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
+                ", releaseTime='" + releaseTime + '\'' +
+                '}';
     }
 }

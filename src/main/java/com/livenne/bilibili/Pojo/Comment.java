@@ -2,6 +2,8 @@ package com.livenne.bilibili.Pojo;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 public class Comment {
     @Id
@@ -16,6 +18,9 @@ public class Comment {
 
     @Column(name = "content")
     private String content;
+
+    @Column(name = "release_time")
+    private String releaseTime;
 
     public Integer getId() {
         return id;
@@ -49,6 +54,14 @@ public class Comment {
         this.content = content;
     }
 
+    public String getReleaseTime() {
+        return releaseTime;
+    }
+
+    public void setReleaseTime(String releaseTime) {
+        this.releaseTime = releaseTime;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
@@ -56,6 +69,7 @@ public class Comment {
                 ", authorId=" + authorId +
                 ", videoId=" + videoId +
                 ", content='" + content + '\'' +
+                ", releaseTime=" + releaseTime +
                 '}';
     }
 }
